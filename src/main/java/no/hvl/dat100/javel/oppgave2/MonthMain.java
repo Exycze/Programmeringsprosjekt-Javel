@@ -5,6 +5,14 @@ import no.hvl.dat100.javel.oppgave1.DayPowerData;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class MonthMain {
+
+    private static void printHeader(String title) {
+        System.out.println("==============");
+        System.out.println(title);
+        System.out.println("==============");
+        System.out.println();
+    }
+
     public static void main(String[] args) {
 
         // test data
@@ -17,13 +25,26 @@ public class MonthMain {
         System.out.println("==============");
         System.out.println();
 
-        /*
-        TODO
+        printHeader("Oppgave a");
+        MonthlyPower.print_PowerUsage(power_usage_month);
 
-         Write code that tests the methods you implement in the MonthlyPower class
-         Remember to teste the methods as you implement them
-         Remember to also to check that you get the expected results
-         */
+        printHeader("Oppgave b");
+        MonthlyPower.print_PowerPrices(power_prices_month);
 
+        printHeader("Oppgave c");
+        MonthlyPower.computePowerUsage(power_usage_month);
+
+        printHeader("Oppgave d");
+        //Set threshold
+        double thresholdHytte = 1000;
+        double thresholdBolig = 5000;
+
+// Check for hytte threshold
+        boolean exceededHytte = MonthlyPower.exceedThreshold(power_usage_month, thresholdHytte);
+        System.out.println("Threshold for hytte (" + thresholdHytte + " kWh) exceeded: " + exceededHytte);
+
+// Check for bolig threshold
+        boolean exceededBolig = MonthlyPower.exceedThreshold(power_usage_month, thresholdBolig);
+        System.out.println("Threshold for bolig (" + thresholdBolig + " kWh) exceeded: " + exceededBolig);
     }
 }

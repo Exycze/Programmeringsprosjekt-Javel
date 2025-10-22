@@ -4,16 +4,18 @@ public class DailyPower {
 
     // a) print power prices during a day
     public static void printPowerPrices(double[] prices) {
-
-        // TODO
-
+        for (double price : prices) {
+            System.out.print(price + " NOK, ");
+        }
+        System.out.println();
     }
 
     // b) print power usage during a day
     public static void printPowerUsage(double[] usage) {
-
-        // TODO
-
+        for (double power : usage) {
+            System.out.print(power + " kWh, ");
+        }
+        System.out.println();
     }
 
     // c) compute power usage for a single day
@@ -21,7 +23,9 @@ public class DailyPower {
 
         double sum = 0;
 
-        // TODO
+        for (double power : usage) {
+            sum += power;
+        }
 
         return sum;
     }
@@ -31,7 +35,9 @@ public class DailyPower {
 
         double price = 0;
 
-        // TODO
+        for (int i = 0; i < usage.length; i++) {
+            price += prices[i] * usage[i];
+        }
 
         return price;
     }
@@ -44,7 +50,10 @@ public class DailyPower {
 
         double support = 0;
 
-        // TODO
+        if (usage > THRESHOLD) {
+            double excess = price - THRESHOLD;
+            support = usage * excess * PERCENTAGE;
+        }
 
         return support;
     }
@@ -54,7 +63,9 @@ public class DailyPower {
 
         double support = 0;
 
-        // TODO
+        for (int i = 0; i < usage.length; i++) {
+            support += getSupport(usage[i], prices[i]);
+        }
 
         return support;
     }
@@ -64,11 +75,7 @@ public class DailyPower {
     // g) compute norges pris for a single day
     public static double computeNorgesPrice(double[] usage) {
 
-        double price = 0;
-
-        // TODO
-
-        return price;
+        return computePowerUsage(usage) * NORGESPRIS_KWH;
     }
 
     // g) compute peak usage during a single day
@@ -76,17 +83,15 @@ public class DailyPower {
 
         double temp_max = 0;
 
-        // TODO
+        for (double i : usage)
+            if (i > temp_max) {
+                temp_max = i;
+            }
 
         return temp_max;
     }
 
     public static double findAvgPower(double[] usage) {
-
-        double average = 0;
-
-        // TODO
-
-        return average;
+        return (computePowerUsage(usage) / usage.length);
     }
 }

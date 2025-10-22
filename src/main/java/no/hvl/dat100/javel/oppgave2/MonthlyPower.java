@@ -6,16 +6,26 @@ public class MonthlyPower {
 
     // a) print power usage for a month
     public static void print_PowerUsage(double[][] usage) {
-
-        // TODO
-
+        for (int i = 0; i < usage.length; i++) {
+            System.out.print("Day " + (i + 1) + ":");
+            for (int j = 0; j < usage[i].length; j++) {
+                System.out.printf(" %.2f kWh", usage[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
 
     // b) print power prices for a month
     public static void print_PowerPrices(double[][] prices) {
-
-        // TODO
-
+        for (int i = 0; i < prices.length; i++) {
+            System.out.print("Day " + (i + 1) + ":");
+            for (int j = 0; j < prices[i].length; j++) {
+                System.out.printf(" %.2f", prices[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
 
     // c) compute total power usage for a month
@@ -23,22 +33,37 @@ public class MonthlyPower {
 
         double sum = 0;
 
-        // TODO
-
+        for (double[] day : usage) {
+            for (double value : day) {
+                sum += value;
+            }
+        }
+        System.out.printf("%.2f", sum);
+        System.out.println();
         return sum;
+
     }
 
     // d) determine whether a given threshold in powerusage for the month has been exceeded
     public static boolean exceedThreshold(double[][] powerusage, double threshold) {
-
         boolean exceeded = false;
         double usage = 0;
 
-        // TODO
+        int day = 0;
+        while (day < powerusage.length && !exceeded) {
+            int hour = 0;
+            while (hour < powerusage[day].length && !exceeded) {
+                usage += powerusage[day][hour];
+                if (usage > threshold) {
+                    exceeded = true;
+                }
+                hour++;
+            }
+            day++;
+        }
 
         return exceeded;
     }
-
     // e) compute spot price
     public static double computeSpotPrice(double[][] usage, double[][] prices) {
 
