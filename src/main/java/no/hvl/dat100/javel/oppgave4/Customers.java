@@ -6,63 +6,66 @@ public class Customers {
 
     private Customer[] customers;
 
-    // a) Complete constructor
+    // a) Konstruktør
     public Customers(int size) {
-
-        // TODO
-
+        customers = new Customer[size];
     }
 
-    // b) count number of non-null references
+    // b) Teller antall kunder
     public int countNonNull() {
-
-
         int count = 0;
-
-        // TODO
-
+        for (Customer c : customers) {
+            if (c != null) {
+                count++;
+            }
+        }
         return count;
     }
 
-    // c) return reference to customer with given id (if exists)
+    // c) Hente kunde
     public Customer getCustomer(int customer_id) {
-
-        boolean funnet = false;
-        Customer c = null;
-
-        // TODO
-
-        return c;
+        for (Customer c : customers) {
+            if (c != null && c.getCustomerId() == customer_id) {
+                return c;
+            }
+        }
+        return null;
     }
 
-    // d) add a customer to the reference table
+    // d) Sette inn kunde
     public boolean addCustomer(Customer c) {
-
-        boolean inserted = false;
-
-        // TODO
-
-        return inserted;
+        for (int i = 0; i < customers.length; i++) {
+            if (customers[i] == null) {
+                customers[i] = c;
+                return true;
+            }
+        }
+        return false;
     }
 
-    // e) remove customer with given id from reference table
+    // e) Slette kunde
     public Customer removeCustomer(int customer_id) {
-
-        boolean deleted = false;
-        Customer c = null;
-
-        // TODO
-
-        return c;
+        for (int i = 0; i < customers.length; i++) {
+            if (customers[i] != null && customers[i].getCustomerId() == customer_id) {
+                Customer removed = customers[i];
+                customers[i] = null;
+                return removed;
+            }
+        }
+        return null;
     }
 
-    // f) return reference table with all customers
+    // f) Kunde referansetabell
     public Customer[] getCustomers() {
+        int count = countNonNull();
+        Customer[] result = new Customer[count];
+        int index = 0;
 
-        Customer[] customers = null;
-
-        // TODO
-
-        return customers;
+        for (Customer c : customers) {
+            if (c != null) {
+                result[index++] = c;
+            }
+        }
+        return result;
     }
 }

@@ -1,7 +1,5 @@
 package no.hvl.dat100.javel.oppgave2;
 
-import no.hvl.dat100.javel.oppgave1.DailyPower;
-
 public class MonthlyPower {
 
     // a) print power usage for a month
@@ -13,7 +11,7 @@ public class MonthlyPower {
             }
             System.out.println();
         }
-        System.out.println();
+
     }
 
     // b) print power prices for a month
@@ -25,7 +23,6 @@ public class MonthlyPower {
             }
             System.out.println();
         }
-        System.out.println();
     }
 
     // c) compute total power usage for a month
@@ -38,10 +35,7 @@ public class MonthlyPower {
                 sum += value;
             }
         }
-        System.out.printf("%.2f", sum);
-        System.out.println();
         return sum;
-
     }
 
     // d) determine whether a given threshold in powerusage for the month has been exceeded
@@ -64,33 +58,52 @@ public class MonthlyPower {
 
         return exceeded;
     }
+
     // e) compute spot price
     public static double computeSpotPrice(double[][] usage, double[][] prices) {
-
         double price = 0;
 
-        // TODO
-
+        for (int i = 0; i < usage.length; i++) {
+            for (int j = 0; j < usage[i].length; j++) {
+                price += usage[i][j] * prices[i][j];
+            }
+        }
         return price;
     }
 
     // f) power support for the month
     public static double computePowerSupport(double[][] usage, double[][] prices) {
 
+        double supportLimit = 0.75; // based on
+        double supportRate = 0.90;  // https://www.hvakosterstrommen.no/
+
         double support = 0;
 
-        // TODO
+        for (int i = 0; i < usage.length; i++) {
+            for (int j = 0; j < usage[i].length; j++) {
+                double price = prices[i][j];
+                double used = usage[i][j];
+
+                if (price > supportLimit) {
+                    support = ((price - supportLimit) * supportRate) * used;
+
+                }
+            }
+        }
 
         return support;
     }
 
     // g) Norgesprice for the month
     public static double computeNorgesPrice(double[][] usage) {
-
+        final double averagePriceNorway = 0.70;
         double price = 0;
 
-        // TODO
-
+        for (double[] day : usage) {
+            for (double hour : day) {
+                price += hour * averagePriceNorway;
+            }
+        }
         return price;
     }
 }
