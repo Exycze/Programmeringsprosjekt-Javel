@@ -5,9 +5,8 @@ import no.hvl.dat100.javel.oppgave2.MonthlyPower;
 public class DayMain {
 
     private static void printHeader(String title)  {
-        System.out.println("==============");
+        System.out.println();
         System.out.println(title);
-        System.out.println("==============");
         System.out.println();
     }
 
@@ -22,7 +21,6 @@ public class DayMain {
         System.out.println("==============");
         System.out.println("OPPGAVE 1");
         System.out.println("==============");
-        System.out.println();
 
         printHeader("Oppgave a");
 
